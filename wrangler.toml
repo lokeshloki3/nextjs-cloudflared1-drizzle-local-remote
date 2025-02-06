@@ -1,0 +1,15 @@
+# Your wrangler.toml file should look something like this:
+name = "nextjs-cloudflared1-drizzle-local-remote"
+compatibility_date = "2024-11-11"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# WARNING: When running a production build locally using Wrangler, be aware that the .env file may be omitted. Therefore, ensure that you have the same environment variables in your wrangler.toml file.
+# However, you don't have to include Drizzle environment unless you want to access `drizzle-kit` commands in the deployed code.
+[vars]
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "nextdb" # When you create your D1 DB, you choose the name
+database_id = "5d3514ac-acef-4206-a507-eaac90c92625"
+preview_database_id = "5d3514ac-acef-4206-a507-eaac90c92625"
