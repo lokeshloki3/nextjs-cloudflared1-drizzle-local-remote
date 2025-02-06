@@ -1,6 +1,6 @@
 # Your wrangler.toml file should look something like this:
 name = "nextjs-cloudflared1-drizzle-local-remote"
-compatibility_date = "2024-11-11"
+compatibility_date = "2025-02-07"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
