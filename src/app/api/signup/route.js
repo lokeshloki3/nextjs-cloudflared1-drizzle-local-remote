@@ -3,10 +3,12 @@ import { createUser, getUserByEmail } from '@/server/functions/users';
 
 export const runtime = 'edge';
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const formData = await req.formData();
-    const email = formData.get('email');
+    // const formData = await req.formData();
+    // const email = formData.get('email');
+
+    const { email } = await request.json(); // Destructure email and password
 
     // Check if email already exists
     const existingUser = await getUserByEmail(email);

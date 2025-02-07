@@ -3,11 +3,13 @@ import { getUserByEmail } from "@/server/functions/users";
 
 export const runtime = "edge";
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const formData = await req.formData();
-    const email = formData.get("email");
-    const password = formData.get("password");
+    // const formData = await request.formData();
+    // const email = formData.get("email");
+    // const password = formData.get("password");
+
+    const { email, password } = request.json();
 
     if (!email || !password) {
       return handleErrorResponse({ error: "Missing email or password" }, 400);
