@@ -9,7 +9,7 @@ export async function POST(request) {
     // const email = formData.get("email");
     // const password = formData.get("password");
 
-    const { email, password } = request.json();
+    const { email, password } = await request.json();
 
     if (!email || !password) {
       return handleErrorResponse({ error: "Missing email or password" }, 400);
