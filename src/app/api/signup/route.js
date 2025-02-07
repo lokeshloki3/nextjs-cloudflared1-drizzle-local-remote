@@ -16,7 +16,7 @@ export async function POST(request) {
       return handleErrorResponse({ error: "Email already in use" }, 400);
     }
 
-    await createUser({ email, password });
+    await createUser(email, password);
 
     return handleErrorResponse({ success: true, message: "User registered successfully" }, 201);
 
