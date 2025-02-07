@@ -8,7 +8,7 @@ export async function POST(request) {
     // const formData = await request.formData();
     // const email = formData.get('email');
 
-    const { email } = await request.json(); // Destructure email and password
+    const { email, password } = await request.json(); // Destructure email and password
 
     // Check if email already exists
     const existingUser = await getUserByEmail(email);
@@ -16,7 +16,7 @@ export async function POST(request) {
       return handleErrorResponse({ error: "Email already in use" }, 400);
     }
 
-    await createUser(formData);
+    await createUser({ email, password });
 
     return handleErrorResponse({ success: true, message: "User registered successfully" }, 201);
 

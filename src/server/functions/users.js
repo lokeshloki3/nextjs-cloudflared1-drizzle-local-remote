@@ -11,11 +11,8 @@ export const getUserByEmail = async (email) => {
   return await db.select().from(usersData).where(eq(usersData.email, email)).get();
 };
 
-export const createUser = async (formData) => {
+export const createUser = async (email, password) => {
   'use server';
-
-  const email = formData.get('email');
-  const password = formData.get('password');
 
   try {
     // Check if email already exists
