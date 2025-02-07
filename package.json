@@ -6,7 +6,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate:dev": "wrangler d1 migrations apply DB --local",
     "db:migrate:prod": "wrangler d1 migrations apply DB --remote",
-    "db:studio:dev": "cross-env DB_LOCAL_PATH=.wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite drizzle-kit studio --port 3094",
+    "db:studio:dev": "cross-env DB_LOCAL_PATH=.wrangler/state/v3/d1/miniflare-D1DatabaseObject/3095f66bdf147a1af06cac8789b263350220e937d2ce4225bec653a189ab06e9.sqlite drizzle-kit studio --port 3094",
     "db:studio:prod": "drizzle-kit studio --port 3098",
     "build": "next build",
     "dev": "next dev",
@@ -35,6 +35,8 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.1",
     "wrangler": "^3.99.0"
   },
