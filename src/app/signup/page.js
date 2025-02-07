@@ -6,16 +6,10 @@ import { useRouter } from 'next/navigation';
 export const runtime = 'edge';
 
 export default function SignupPage() {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +21,7 @@ export default function SignupPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
@@ -57,8 +51,8 @@ export default function SignupPage() {
           placeholder="Email"
           className="w-full px-4 py-2 border rounded-lg"
           required
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
@@ -66,13 +60,14 @@ export default function SignupPage() {
           placeholder="Password"
           className="w-full px-4 py-2 border rounded-lg"
           required
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
           Sign Up
         </button>
       </form>
+
       <p className="mt-4">
         Already have an account?{' '}
         <a href="/login" className="text-blue-500 hover:underline">

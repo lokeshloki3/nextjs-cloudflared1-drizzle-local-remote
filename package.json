@@ -6,7 +6,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate:dev": "wrangler d1 migrations apply DB --local",
     "db:migrate:prod": "wrangler d1 migrations apply DB --remote",
-    "db:studio:dev": "cross-env DB_LOCAL_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio --port 3094",
+    "db:studio:dev": "cross-env DB_LOCAL_PATH=.wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite drizzle-kit studio --port 3094",
     "db:studio:prod": "drizzle-kit studio --port 3098",
     "build": "next build",
     "dev": "next dev",

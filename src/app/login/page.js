@@ -1,46 +1,40 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export const runtime = "edge";
+export const runtime = 'edge';
 
 export default function LoginPage() {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
+      const response = await fetch('/api/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json", // Set content type
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Invalid credentials");
+        setError(data.error || 'Invalid credentials');
         return;
       }
 
-      alert("Login successful!");
-      router.push("/dashboard");
+      alert('Login successful!');
+      router.push('/dashboard');
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      setError('An error occurred. Please try again.');
     }
   };
 
@@ -57,21 +51,25 @@ export default function LoginPage() {
           placeholder="Email"
           className="w-full px-4 py-2 border rounded-lg"
           required
-          value={formData.email}
-          onChange={handleChange} />
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <input
           type="password"
           name="password"
           placeholder="Password"
           className="w-full px-4 py-2 border rounded-lg"
           required
-          value={formData.password}
-          onChange={handleChange} />
-        <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Log In</button>
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+          Log In
+        </button>
       </form>
 
       <p className="mt-4">
-        Don't have an account?{" "}
+        Don't have an account?{' '}
         <a href="/signup" className="text-blue-500 hover:underline">
           Sign up
         </a>
