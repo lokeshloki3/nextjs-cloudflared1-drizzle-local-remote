@@ -31,7 +31,7 @@ export default function LoginPage() {
         return;
       }
 
-      alert('Login successful!');
+      alert(data.message);
       router.push('/dashboard');
     } catch (error) {
       setError('An error occurred. Please try again.');

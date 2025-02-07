@@ -5,22 +5,22 @@ export const runtime = 'edge';
 
 export async function POST(request) {
   try {
-    // const formData = await request.formData();
-    // const email = formData.get('email');
-
     const { email, password } = await request.json(); // Destructure email and password
 
-    // Check if email already exists
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
-      return handleErrorResponse({ error: "Email already in use" }, 400);
+      return handleErrorResponse("Email already in use", 400);
     }
 
     await createUser(email, password);
 
-    return handleErrorResponse({ success: true, message: "User registered successfully" }, 201);
+    return new Response(
+      JSON.stringify({ success: true, message: "User registered successfully" }),
+      { status: 201, headers: { "Content-Type": "application/json" } }
+    );
 
   } catch (error) {
-    return handleErrorResponse({ error: error.message || "Server error" }, 400);
+    console.error("Error in registration route:", error);
+    return handleErrorResponse("Internal server error", 500);
   }
 }

@@ -27,14 +27,13 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || 'Something went wrong');
+        setError(data.error);
         return;
       }
 
-      alert('Signup successful! Please log in.');
+      alert(data.message);
       setEmail('');
       setPassword('');
-      setError('');
       router.push('/login');
     } catch (error) {
       setError('An error occurred. Please try again.');
