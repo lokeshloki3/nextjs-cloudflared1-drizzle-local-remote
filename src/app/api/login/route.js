@@ -1,3 +1,4 @@
+import { handleErrorResponse } from "@/lib/utils";
 import { getUserByEmail } from "@/server/functions/users";
 
 export const runtime = "edge";
@@ -9,29 +10,18 @@ export async function POST(req) {
     const password = formData.get("password");
 
     if (!email || !password) {
-      return new Response(JSON.stringify({ error: "Missing email or password" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return handleErrorResponse({ error: "Missing email or password" }, 400);
     }
 
     // Fetch user from the database
     const user = await getUserByEmail(email);
     if (!user || user.password !== password) {
-      return new Response(JSON.stringify({ error: "Invalid email or password" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      });
+      return handleErrorResponse({ error: "Invalid email or password" }, 401);
     }
 
-    return new Response(JSON.stringify({ success: true, message: "Login successful" }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return handleErrorResponse({ success: true, message: "Login successful" });
+
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message || "Server error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return handleErrorResponse({ error: error.message || "Server error" }, 500);
   }
 }
