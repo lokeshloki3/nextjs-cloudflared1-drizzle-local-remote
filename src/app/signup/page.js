@@ -32,6 +32,9 @@ export default function SignupPage() {
       }
 
       alert('Signup successful! Please log in.');
+      setEmail('');
+      setPassword('');
+      setError('');
       router.push('/login');
     } catch (error) {
       setError('An error occurred. Please try again.');
