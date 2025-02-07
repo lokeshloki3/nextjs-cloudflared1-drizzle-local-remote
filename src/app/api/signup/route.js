@@ -5,7 +5,7 @@ export const runtime = 'edge';
 
 export async function POST(request) {
   try {
-    // const formData = await req.formData();
+    // const formData = await request.formData();
     // const email = formData.get('email');
 
     const { email } = await request.json(); // Destructure email and password
