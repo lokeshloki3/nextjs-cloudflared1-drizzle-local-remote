@@ -50,7 +50,7 @@ export default function LoginPage() {
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <form action={handleSubmit} className="w-80 space-y-4">
+      <form onSubmit={handleSubmit} className="w-80 space-y-4">
         <input
           type="email"
           name="email"
